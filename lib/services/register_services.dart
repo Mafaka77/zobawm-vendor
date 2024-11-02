@@ -78,7 +78,20 @@ class RegisterServices extends BaseService {
                       idProof.path,
                       filename: idProof.name,
                     ),
+              'specialization_certificate': specializationProof!.path.isEmpty
+                  ? null
+                  : await MultipartFile.fromFile(
+                      specializationProof.path,
+                      filename: specializationProof.name,
+                    ),
+              'profile_picture': profileImage!.path.isEmpty
+                  ? null
+                  : await MultipartFile.fromFile(
+                      profileImage.path,
+                      filename: profileImage.name,
+                    ),
             });
+
             var response = await client.post(
               Routes.REGISTER_DOCTOR_WITH_CLINIC,
               data: formData,
@@ -88,10 +101,23 @@ class RegisterServices extends BaseService {
           }
         case 'calldoctor':
           {
-            print('Hello');
+            print('Doctor');
+          }
+        case 'callnurse':
+          {
+            print('Nurse');
+          }
+        case 'calltechnician':
+          {
+            print('LAB TECH');
+          }
+        case 'callambulance':
+          {
+            print('Ambulance');
           }
       }
     } catch (ex) {
+      print(ex);
       return Future.error(ex);
     }
   }

@@ -100,13 +100,12 @@ class PersonalInfoWidget extends GetView<RegisterController> {
                 return null;
               },
               items: (f, cs) => ["Male", 'Female'],
-              popupProps: PopupProps.menu(
-                  disabledItemFn: (item) => item == 'Item 3',
-                  fit: FlexFit.loose),
+              popupProps: const PopupProps.menu(
+                fit: FlexFit.loose,
+              ),
               decoratorProps: DropDownDecoratorProps(
                 decoration: textBoxDecorationStyle('Gender'),
               ),
-              mode: Mode.form,
               selectedItem: controller.genderText.value,
               onChanged: (value) {
                 controller.genderText.value = value!;
@@ -131,7 +130,7 @@ class PersonalInfoWidget extends GetView<RegisterController> {
                     showDayOfWeek: true,
                     // This is called when the user changes the date.
                     onDateTimeChanged: (DateTime newDate) {
-                      final DateFormat formatter = DateFormat('dd-MM-yyyy');
+                      final DateFormat formatter = DateFormat('yyyy-MM-dd');
                       final String formatted = formatter.format(newDate);
                       controller.dobText.text = formatted;
                     },
